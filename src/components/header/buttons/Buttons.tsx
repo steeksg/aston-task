@@ -4,12 +4,14 @@ import ButtonSignIn from "./signin/ButtonSignIn";
 import ButtonSignUp from "./signup/ButtonSignUp";
 
 import "./Buttons.scss";
+import { Outlet } from "react-router-dom";
 
 export default function Buttons() {
   return (
     <Stack className="buttons--wrap" spacing={2} direction="row">
       <ButtonSignIn />
       <ButtonSignUp />
+      <Outlet />
     </Stack>
   );
 }

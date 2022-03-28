@@ -8,13 +8,12 @@ import "./Body.scss";
 
 export default function Body() {
   return (
-    <div className="body--wrap">
-      <Container>
+      <Container className="body--wrap">
         <Routes>
-          <Route path="signup" element={<PageSignUp />} />
           <Route path="/" element={<PageMain />} />
+          <Route path="signup" element={<PageSignUp />} />
+          <Route path="*" element={<PageMain />} />
         </Routes>
       </Container>
-    </div>
   );
 }

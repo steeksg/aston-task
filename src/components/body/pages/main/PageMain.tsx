@@ -47,7 +47,7 @@ export default function PageMain() {
             fullWidth
             label="Search"
             onKeyDown={(event) => {
-              if (event.key == "Enter") searchStart();
+              if (event.key === "Enter") searchStart();
             }}
             endAdornment={
               <InputAdornment position="end">
