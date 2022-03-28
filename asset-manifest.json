@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aston-task/static/css/main.6adb20b2.css",
-    "main.js": "/aston-task/static/js/main.1c9ebc08.js",
+    "main.css": "/aston-task/static/css/main.06cebc44.css",
+    "main.js": "/aston-task/static/js/main.9d2c2364.js",
     "static/media/background.png": "/aston-task/static/media/background.b407a77bd16fa96c0c46.png",
     "static/media/logo.svg": "/aston-task/static/media/logo.c153a3c95065947391bc7e6ce2ff23d1.svg",
     "index.html": "/aston-task/index.html",
-    "main.6adb20b2.css.map": "/aston-task/static/css/main.6adb20b2.css.map",
-    "main.1c9ebc08.js.map": "/aston-task/static/js/main.1c9ebc08.js.map"
+    "main.06cebc44.css.map": "/aston-task/static/css/main.06cebc44.css.map",
+    "main.9d2c2364.js.map": "/aston-task/static/js/main.9d2c2364.js.map"
   },
   "entrypoints": [
-    "static/css/main.6adb20b2.css",
-    "static/js/main.1c9ebc08.js"
+    "static/css/main.06cebc44.css",
+    "static/js/main.9d2c2364.js"
   ]
 }
