@@ -1,6 +1,8 @@
 # Описание
 Проект в рамках React 11.
+
 [Выбранное API](https://rickandmortyapi.com/documentation/)
+
 [Результат на GHP](https://steeksg.github.io/aston-task/)
 
 # Требования
