@@ -1,4 +1,9 @@
 .buttons {
+
+  &--wrap {
+    height: 30px;
+  }
+
   &-backgroundColor {
     &-white {
       background-color: white !important;
