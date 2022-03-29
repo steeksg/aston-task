@@ -2,5 +2,23 @@
     &--wrap {
         padding-top: 10px;
         height:calc(100% - 60px) ;
+        overflow: hidden;
+        display: flex;
+
+    }
+
+    &--background{
+        &-sign {
+            background-image: url('./backgrounds/sign.png');
+            background-size: cover;
+        }
+        &-main{
+            background-image: url('./backgrounds/main.png');
+            background-size: cover;
+        }
+    }
+
+    &--content {
+
     }
 }

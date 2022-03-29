@@ -2,25 +2,31 @@ import {
   Avatar,
   Box,
   Button,
-  Container,
   Grid,
   TextField,
   Typography,
 } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import "./PageSignUp.scss";
+import "./PageSign.scss";
+import { IUserInfo } from "./tsTypes/IUserInfo";
+import { userLogIn } from "./signSlice";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { changeBackground } from "../../../../appSlice";
 
-interface IUserInfo {
-  username: string;
-  password: string;
+interface IPageSignProps {
+  typeSign: EnumTypeSign;
 }
 
-export default function PageSignUp() {
-  const [isNeedRefreshUsers, setIsNeedRefreshUsers] = useState(true);
+export enum EnumTypeSign {
+  In,
+  Up,
+}
 
+export default function PageSign({ typeSign }: IPageSignProps) {
+  const [isNeedRefreshUsers, setIsNeedRefreshUsers] = useState(true);
   const [username, setUsername] = useState({
     value: "",
     isValid: true,
@@ -32,6 +38,14 @@ export default function PageSignUp() {
     textError: "",
   });
   const [users, setUsers] = useState<IUserInfo[] | []>([]);
+
+  const dispatch = useAppDispatch();
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(changeBackground("sign"))
+  }, []);
 
   useEffect(() => {
     if (isNeedRefreshUsers) {
@@ -66,7 +80,7 @@ export default function PageSignUp() {
     }
   };
 
-  const isValidData = () => {
+  const isNotEmptyNameAndPass = () => {
     let result = true;
 
     if (!username.value) {
@@ -87,6 +101,12 @@ export default function PageSignUp() {
       result = false;
     }
 
+    return result;
+  };
+
+  const validSignUp = () => {
+    let result = isNotEmptyNameAndPass();
+
     if (users.find((item) => item.username === username.value)) {
       setUsername({
         ...username,
@@ -97,13 +117,41 @@ export default function PageSignUp() {
     }
 
     return result;
-  }
+  };
 
   const handleSubmit = () => {
-   
+    if (typeSign === EnumTypeSign.Up) handleSubmitSignUp();
+    else if (typeSign === EnumTypeSign.In) handleSubmitSignIn();
+  };
 
-    // if (username.isValid && password.isValid) {
-    if (isValidData()) {
+  const validSignIn = () => {
+    let result = isNotEmptyNameAndPass();
+
+    const user = users.find((item) => item.username === username.value);
+
+    if (!user) {
+      setUsername({
+        ...username,
+        isValid: false,
+        textError: "This username is not registered!",
+      });
+      result = false;
+    } else {
+      if (user.password !== password.value) {
+        setPassword({
+          ...password,
+          isValid: false,
+          textError: "Password is doesn't match!",
+        });
+        result = false;
+      }
+    }
+
+    return result;
+  };
+
+  const handleSubmitSignUp = () => {
+    if (validSignUp()) {
       window.localStorage.setItem(
         "users",
         JSON.stringify([
@@ -112,32 +160,40 @@ export default function PageSignUp() {
         ])
       );
       setIsNeedRefreshUsers(true);
+      dispatch(userLogIn(username.value));
+      navigate("/");
+    }
+  };
+
+  const handleSubmitSignIn = () => {
+    if (validSignIn()) {
+      console.log(
+        `Login with username: ${username.value}, pass: ${password.value}`
+      );
+      dispatch(userLogIn(username.value));
+      navigate("/");
     }
   };
 
   return (
-    <Box className="pageSignUp--wrap">
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar className="pageSignUp--avatar">
+    <Box className="pageSign--wrap">
+      <Box className="pageSign--formBox">
+        <Avatar className="pageSign--avatar">
           <AccountCircleOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5" className="pageSignUp--title">
-          Sign up
+        <Typography component="h1" variant="h5" className="pageSign--title">
+          {typeSign === EnumTypeSign.Up ? "Sign up" : "Sign in"}
         </Typography>
         <Box
           component="form"
           onKeyDown={(event: any) => {
-            if (event?.key === "Enter") handleSubmit();
-            return;
+            if (event?.key === "Enter") {
+              event.preventDefault();
+              handleSubmit();
+            }
           }}
         >
-          <Grid container spacing={2} className="pageSignUp--inputBox">
+          <Grid container spacing={2} className="pageSign--inputBox">
             <Grid item xs={12}>
               <TextField
                 autoComplete="username"
@@ -171,21 +227,24 @@ export default function PageSignUp() {
           </Grid>
           <Button
             type="button"
+            size="large"
             fullWidth
             variant="contained"
-            className="pageSignUp--submitButton"
+            className="pageSign--submitButton"
             onClick={(event) => {
               event.preventDefault();
               handleSubmit();
             }}
           >
-            Sign Up
+            {typeSign === EnumTypeSign.Up ? "Sign up" : "Sign in"}
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <Link to="/signin">Already have an account? Sign in</Link>
+          {typeSign === EnumTypeSign.Up && (
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link to="/signin">Already have an account? Sign in</Link>
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </Box>
       </Box>
     </Box>
