@@ -66,13 +66,16 @@ export default function PageSignUp() {
     }
   };
 
-  const handleSubmit = () => {
+  const isValidData = () => {
+    let result = true;
+
     if (!username.value) {
       setUsername({
         ...username,
         isValid: false,
         textError: "Field cannot be empty!",
       });
+      result = false;
     }
 
     if (!password.value) {
@@ -81,6 +84,7 @@ export default function PageSignUp() {
         isValid: false,
         textError: "Field cannot be empty!",
       });
+      result = false;
     }
 
     if (users.find((item) => item.username === username.value)) {
@@ -89,10 +93,17 @@ export default function PageSignUp() {
         isValid: false,
         textError: "This username already use!",
       });
-      return;
+      result = false;
     }
 
-    if (username.isValid && password.isValid) {
+    return result;
+  }
+
+  const handleSubmit = () => {
+   
+
+    // if (username.isValid && password.isValid) {
+    if (isValidData()) {
       window.localStorage.setItem(
         "users",
         JSON.stringify([
