@@ -11,6 +11,8 @@
     overflow: hidden;
     border-radius: 15px;
     position: relative;
+
+    box-shadow: 10px 10px 10px 0px rgba(34, 60, 80, 0.2);
   }
 
   &--descriptionTitle {
@@ -37,7 +39,12 @@
   &--searchBox {
     width: 100%;
 
-    margin-top: 50px;
-    padding: 0 50px;
+    background-color: white;
+    border-radius: 15px;
+
+    margin-top: 30px;
+    padding: 15px 50px 5px;
+
+    box-shadow: 10px 10px 10px 0px rgba(34, 60, 80, 0.2);
   }
 }

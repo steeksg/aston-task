@@ -7,13 +7,22 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import FormHelperText from "@mui/material/FormHelperText";
 
-import background from "./background.png";
+import backgroundDesc from "./backgroundDesc.png";
 
 import "./PageMain.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../../../redux/hooks";
+import { changeBackground } from "../../../../appSlice";
 
 export default function PageMain() {
+
+  const dispatch = useAppDispatch();
+
   const [searchText, setSearchText] = useState("");
+
+  useEffect(() => {
+    dispatch(changeBackground("main"))
+  }, []);
 
   const searchStart = () => {
     console.log(`search start for ${searchText}`);
@@ -22,7 +31,7 @@ export default function PageMain() {
   return (
     <div className="pageMain--wrap">
       <div className="pageMain--descriptionBox">
-        <img src={background} alt="background"></img>
+        <img src={backgroundDesc} alt="background"></img>
         <div className="pageMain--descriptionTitle">Rick & Morty Wiki</div>
         <div className="pageMain--descriptionText">
           Here you will find information about the characters and locations of
