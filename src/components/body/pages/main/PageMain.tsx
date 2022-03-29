@@ -13,10 +13,12 @@ import "./PageMain.scss";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { changeBackground } from "../../../../appSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function PageMain() {
 
   const dispatch = useAppDispatch();
+  let navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
 
@@ -26,6 +28,7 @@ export default function PageMain() {
 
   const searchStart = () => {
     console.log(`search start for ${searchText}`);
+    navigate(`/search?text=${searchText}`)
   };
 
   return (
