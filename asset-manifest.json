@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/aston-task/static/css/main.134b20fe.css",
-    "main.js": "/aston-task/static/js/main.7d60e677.js",
+    "main.css": "/aston-task/static/css/main.3007bd72.css",
+    "main.js": "/aston-task/static/js/main.c7bdb489.js",
     "static/media/sign.png": "/aston-task/static/media/sign.a97e92ff80687d2ad6d7.png",
     "static/media/main.png": "/aston-task/static/media/main.2831fe090f830fa8d09a.png",
     "static/media/backgroundDesc.png": "/aston-task/static/media/backgroundDesc.b407a77bd16fa96c0c46.png",
     "static/media/logo.svg": "/aston-task/static/media/logo.c153a3c95065947391bc7e6ce2ff23d1.svg",
     "index.html": "/aston-task/index.html",
-    "main.134b20fe.css.map": "/aston-task/static/css/main.134b20fe.css.map",
-    "main.7d60e677.js.map": "/aston-task/static/js/main.7d60e677.js.map"
+    "main.3007bd72.css.map": "/aston-task/static/css/main.3007bd72.css.map",
+    "main.c7bdb489.js.map": "/aston-task/static/js/main.c7bdb489.js.map"
   },
   "entrypoints": [
-    "static/css/main.134b20fe.css",
-    "static/js/main.7d60e677.js"
+    "static/css/main.3007bd72.css",
+    "static/js/main.c7bdb489.js"
   ]
 }
