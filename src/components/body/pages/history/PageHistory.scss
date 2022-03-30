@@ -1,0 +1,12 @@
+.pageHistory {
+  &--wrap {
+      width: 100%;
+      background-color: white;
+
+      .MuiListItemText-secondary {
+          display: flex;
+          width: 100%;
+          justify-content: space-around;
+      }
+  }
+}
