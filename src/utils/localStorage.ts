@@ -1,3 +1,4 @@
+import { IFilterCharacter } from "../components/body/pages/search/searchSlice";
 import { IUserInfo } from "../components/body/pages/sign/tsTypes/IUserInfo";
 
 export const isFavoriteById = (
@@ -18,11 +19,14 @@ export const addIdToFavorite = (
 };
 
 export const initLS = () => {
-  window.localStorage.setItem("favorites", "{}");
-  window.localStorage.setItem("users", "[]");
+  !window.localStorage.getItem("favorites") &&  window.localStorage.setItem("favorites", "{}");
+  !window.localStorage.getItem("users") && window.localStorage.setItem("users", "[]");
+  !window.localStorage.getItem("history") && window.localStorage.setItem("history", "{}");
 };
 
-export const resetFavoriteByUsername = (username: string = getUsernameFromLS()) => {
+export const resetFavoriteByUsername = (
+  username: string = getUsernameFromLS()
+) => {
   let favorites: { [key: string]: number[] } = getAllFavorites();
   favorites[username] = [];
   window.localStorage.setItem("favorites", JSON.stringify(favorites));
@@ -70,4 +74,38 @@ export const addUserToLS = (user: { username: string; password: string }) => {
     "users",
     JSON.stringify([...getAllUsersFromLS(), user])
   );
+};
+
+export const addRecordInHistory = (
+  record: IFilterCharacter,
+  username: string = getUsernameFromLS()
+) => {
+
+  let allHistory = getAllHistory();
+  let history = getHistoryByUser(username);
+  history && history.push(record);
+  allHistory[username] = history;
+  window.localStorage.setItem("history", JSON.stringify(allHistory));
+};
+
+export const getAllHistory = () => {
+  let historyJSON = window.localStorage.getItem("history");
+  let history: { [key: string]: IFilterCharacter[] } = historyJSON
+    ? JSON.parse(historyJSON)
+    : {};
+  return history;
+};
+
+export const getHistoryByUser = (
+  username: string = getUsernameFromLS()
+): IFilterCharacter[] => {
+  return getAllHistory()[username];
+};
+
+export const resetHistoryByUsername = (
+  username: string = getUsernameFromLS()
+) => {
+  let history: { [key: string]: IFilterCharacter[] } = getAllHistory();
+  history[username] = [];
+  window.localStorage.setItem("history", JSON.stringify(history));
 };

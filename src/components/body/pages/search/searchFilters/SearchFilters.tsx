@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { addRecordInHistory } from "../../../../../utils/localStorage";
 import {
   IFilterCharacterList,
   useGetAllFiltersQuery,
@@ -51,6 +52,11 @@ export default function SearchFilters() {
     });
 
     setSearchParams({ ...filter });
+
+    addRecordInHistory({
+      ...filters,
+      page: filters.page.toString(),
+    });
   }, [filters]);
 
   return (
@@ -77,7 +83,11 @@ export default function SearchFilters() {
                 label="Gender"
                 value={filters.gender || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, gender: event.target.value || "", page: 1 })
+                  setFilters({
+                    ...filters,
+                    gender: event.target.value || "",
+                    page: 1,
+                  })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
@@ -97,7 +107,11 @@ export default function SearchFilters() {
                 label="Species"
                 value={filters.species || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, species: event.target.value || "", page: 1 })
+                  setFilters({
+                    ...filters,
+                    species: event.target.value || "",
+                    page: 1,
+                  })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
@@ -117,7 +131,11 @@ export default function SearchFilters() {
                 label="Status"
                 value={filters.status || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, status: event.target.value || "", page: 1 })
+                  setFilters({
+                    ...filters,
+                    status: event.target.value || "",
+                    page: 1,
+                  })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
