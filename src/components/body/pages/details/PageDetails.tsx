@@ -11,15 +11,24 @@ import { useGetCharacterQuery } from "./detailsSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import "./PageDetails.scss";
+import { useAppSelector } from "../../../../redux/hooks";
+import { selectSign } from "../sign/signSlice";
+import { useEffect, useState } from "react";
+import { addIdToFavorite, isFavoriteById, removeIdFromFavorite } from "../../../../utils/localStorage";
 
 export default function PageDetails() {
   let params = useParams();
 
+  const username = useAppSelector(selectSign);
+  const [isFavorite, setIsFavorite] = useState(false);
   const { data, error } = useGetCharacterQuery(Number(params.id));
+
+  useEffect(() => {
+    data && setIsFavorite(isFavoriteById(data.id, username));
+  }, [data]);
 
   return (
     <div className="pageDetails--wrap">
-      {/* {data && <CardCharacter {...data} />} */}
       {!error && data && (
         <Card className="pageDetails--card">
           <CardMedia
@@ -58,7 +67,20 @@ export default function PageDetails() {
             </Typography>
           </CardContent>
           <CardActions className="pageDetails--buttonBox">
-            <IconButton size="large" aria-label="add to favorites">
+            <IconButton
+              color={isFavorite ? "error" : "default"}
+              size="large"
+              aria-label="add to favorites"
+              onClick={() => {
+                if (isFavoriteById(data.id, username)) {
+                  removeIdFromFavorite(data.id, username)
+                  setIsFavorite(false);
+                } else {
+                  addIdToFavorite(data.id, username)
+                  setIsFavorite(true);
+                }
+              }}
+            >
               <FavoriteIcon />
             </IconButton>
           </CardActions>

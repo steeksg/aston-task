@@ -1,6 +1,6 @@
 import { createEntityAdapter } from "@reduxjs/toolkit";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ICharacter } from "../search/searchSlice";
+import { ICharacter, IResponse } from "../search/searchSlice";
 
 const characterAdapter = createEntityAdapter();
 const initialState = characterAdapter.getInitialState();
@@ -12,7 +12,10 @@ export const detailsSlice = createApi({
     getCharacter: builder.query<ICharacter, number>({
       query: (id) => `/character/${id}`,
     }),
+    getArrayCharacter: builder.query<ICharacter[], string>({
+      query: (ids) => `/character/${ids}`,
+    }),
   }),
 });
 
-export const { useGetCharacterQuery } = detailsSlice;
+export const { useGetCharacterQuery, useGetArrayCharacterQuery } = detailsSlice;

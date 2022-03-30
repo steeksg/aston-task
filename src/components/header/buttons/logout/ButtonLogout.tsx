@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux/hooks";
+import { resetUsernameToLS } from "../../../../utils/localStorage";
 import { userLogOut } from "../../../body/pages/sign/signSlice";
 
 export default function ButtonLogout() {
@@ -13,6 +14,7 @@ export default function ButtonLogout() {
       variant="contained"
       onClick={() => {
         dispatch(userLogOut());
+        resetUsernameToLS();
         navigate("/");
       }}
     >

@@ -1,7 +1,20 @@
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Fab,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { ICharacter } from "../searchSlice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./CardCharacter.scss";
+import {
+  addIdToFavorite,
+  isFavoriteById,
+  removeIdFromFavorite,
+} from "../../../../../utils/localStorage";
 
 export default function CardCharacter(props: ICharacter) {
   return (

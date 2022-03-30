@@ -9,6 +9,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectApp } from "../../appSlice";
 import PageSearch from "./pages/search/PageSearch";
 import PageDetails from "./pages/details/PageDetails";
+import PageFavorites from "./pages/favorites/PageFavorites";
 
 export default function Body() {
   const backgroundName = useAppSelector(selectApp);
@@ -28,6 +29,7 @@ export default function Body() {
           />
           <Route path="search" element={<PageSearch />} />
           <Route path="details/:id" element={<PageDetails />} />
+          <Route path="favorites" element={<PageFavorites />} />
           <Route path="*" element={<PageMain />} />
         </Routes>
       </Container>
