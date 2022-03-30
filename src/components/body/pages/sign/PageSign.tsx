@@ -18,7 +18,7 @@ import { changeBackground } from "../../../../appSlice";
 import {
   addUserToLS,
   getAllUsersFromLS,
-  resetFavorite,
+  resetFavoriteByUsername,
   setUsernameToLS,
 } from "../../../../utils/localStorage";
 
@@ -162,7 +162,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
       setIsNeedRefreshUsers(true);
       dispatch(userLogIn(username.value));
       setUsernameToLS(username.value);
-      resetFavorite(username.value);
+      resetFavoriteByUsername(username.value);
       navigate("/");
     }
   };

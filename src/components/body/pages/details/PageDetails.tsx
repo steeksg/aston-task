@@ -24,7 +24,7 @@ export default function PageDetails() {
   const { data, error } = useGetCharacterQuery(Number(params.id));
 
   useEffect(() => {
-    data && setIsFavorite(isFavoriteById(data.id, username));
+    data && username && setIsFavorite(isFavoriteById(data.id, username));
   }, [data]);
 
   return (

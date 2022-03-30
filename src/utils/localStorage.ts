@@ -17,7 +17,12 @@ export const addIdToFavorite = (
   window.localStorage.setItem("favorites", JSON.stringify(favorites));
 };
 
-export const resetFavorite = (username: string = getUsernameFromLS()) => {
+export const initLS = () => {
+  window.localStorage.setItem("favorites", "{}");
+  window.localStorage.setItem("users", "[]");
+};
+
+export const resetFavoriteByUsername = (username: string = getUsernameFromLS()) => {
   let favorites: { [key: string]: number[] } = getAllFavorites();
   favorites[username] = [];
   window.localStorage.setItem("favorites", JSON.stringify(favorites));
