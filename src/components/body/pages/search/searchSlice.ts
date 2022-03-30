@@ -28,6 +28,19 @@ export interface IResponse {
   results: ICharacter[];
 }
 
+export interface IFilterCharacter {
+  name: string;
+  species?: string;
+  gender?: string;
+  status?: string;
+}
+
+export interface IFilterCharacterList {
+  species: string[];
+  gender: string[];
+  status: string[];
+}
+
 const charactersAdapter = createEntityAdapter();
 const initialState = charactersAdapter.getInitialState();
 
@@ -38,16 +51,46 @@ export const apiSlice = createApi({
     getCharacters: builder.query<ICharacter[], void>({
       query: () => "/character",
       transformResponse: (responseData: IResponse) => {
-        return responseData.results
-      }
+        return responseData.results;
+      },
     }),
-    searchCharacter: builder.query<ICharacter[], string>({
-      query: (text: string) => `/character/?name=${text}`,
+    getAllFilters: builder.query<IFilterCharacterList, void>({
+      query: () => "/character",
       transformResponse: (responseData: IResponse) => {
-        return responseData.results
-      }
+        let speciesSet = new Set<string>();
+        let genderSet = new Set<string>();
+        let statusSet = new Set<string>();
+
+        responseData.results.map((i) => {
+          speciesSet.add(i.species);
+          genderSet.add(i.gender);
+          statusSet.add(i.status);
+        });
+
+        return {
+          species: Array.from(speciesSet),
+          gender: Array.from(genderSet),
+          status: Array.from(statusSet),
+        };
+      },
+    }),
+    searchCharacter: builder.query<ICharacter[], IFilterCharacter>({
+      query: (filter: IFilterCharacter) =>
+        `/character/?name=${filter.name}${
+          filter.species ? "&species=" + filter.species : ""
+        }${filter.gender ? "&gender=" + filter.gender : ""}${
+          filter.status ? "&status=" + filter.status : ""
+        }
+        `,
+      transformResponse: (responseData: IResponse) => {
+        return responseData.results;
+      },
     }),
   }),
 });
 
-export const { useGetCharactersQuery, useSearchCharacterQuery  } = apiSlice;
+export const {
+  useGetCharactersQuery,
+  useSearchCharacterQuery,
+  useGetAllFiltersQuery,
+} = apiSlice;

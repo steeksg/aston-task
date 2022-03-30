@@ -27,8 +27,7 @@ export default function PageMain() {
   }, []);
 
   const searchStart = () => {
-    console.log(`search start for ${searchText}`);
-    navigate(`/search?text=${searchText}`)
+    navigate(`/search?name=${searchText}`)
   };
 
   return (
@@ -47,7 +46,6 @@ export default function PageMain() {
       </div>
 
       <div className="pageMain--searchBox">
-        {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined"> */}
         <FormControl variant="outlined" fullWidth>
           <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
           <OutlinedInput
