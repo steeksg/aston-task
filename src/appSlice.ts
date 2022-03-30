@@ -6,7 +6,7 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-    background: "",
+    background: "main",
 };
 
 export const appSlice = createSlice({
