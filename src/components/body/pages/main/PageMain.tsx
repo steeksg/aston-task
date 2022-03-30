@@ -13,10 +13,12 @@ import "./PageMain.scss";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { changeBackground } from "../../../../appSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function PageMain() {
 
   const dispatch = useAppDispatch();
+  let navigate = useNavigate();
 
   const [searchText, setSearchText] = useState("");
 
@@ -25,7 +27,7 @@ export default function PageMain() {
   }, []);
 
   const searchStart = () => {
-    console.log(`search start for ${searchText}`);
+    navigate(`/search?name=${searchText}`)
   };
 
   return (
@@ -44,7 +46,6 @@ export default function PageMain() {
       </div>
 
       <div className="pageMain--searchBox">
-        {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined"> */}
         <FormControl variant="outlined" fullWidth>
           <InputLabel htmlFor="outlined-adornment-password">Search</InputLabel>
           <OutlinedInput

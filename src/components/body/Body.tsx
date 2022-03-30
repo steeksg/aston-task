@@ -7,6 +7,7 @@ import PageSign, { EnumTypeSign } from "./pages/sign/PageSign";
 import "./Body.scss";
 import { useAppSelector } from "../../redux/hooks";
 import { selectApp } from "../../appSlice";
+import PageSearch from "./pages/search/PageSearch";
 
 export default function Body() {
   const backgroundName = useAppSelector(selectApp);
@@ -23,6 +24,10 @@ export default function Body() {
           <Route
             path="signin"
             element={<PageSign typeSign={EnumTypeSign.In} />}
+          />
+          <Route
+            path="search"
+            element={<PageSearch />}
           />
           <Route path="*" element={<PageMain />} />
         </Routes>
