@@ -44,7 +44,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
   let navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(changeBackground("sign"))
+    dispatch(changeBackground("sign"));
   }, []);
 
   useEffect(() => {
@@ -161,7 +161,15 @@ export default function PageSign({ typeSign }: IPageSignProps) {
       );
       setIsNeedRefreshUsers(true);
       dispatch(userLogIn(username.value));
-      window.localStorage.setItem("currentUser", username.value)
+      window.localStorage.setItem("currentUser", username.value);
+
+      let favoritesJSON = window.localStorage.getItem("favorites");
+      let favorites: { [key: string]: number[] } = favoritesJSON
+        ? JSON.parse(favoritesJSON)
+        : {};
+      favorites[username.value] = [];
+      window.localStorage.setItem("favorites", JSON.stringify(favorites));
+
       navigate("/");
     }
   };
@@ -172,7 +180,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
         `Login with username: ${username.value}, pass: ${password.value}`
       );
       dispatch(userLogIn(username.value));
-      window.localStorage.setItem("currentUser", username.value)
+      window.localStorage.setItem("currentUser", username.value);
       navigate("/");
     }
   };
