@@ -29,6 +29,6 @@
 ## 2 уровень (необязательный)
 - [ ] Проведена оптимизация приложения 
 - [ ] Используются мемоизированные селекторы (createSelector).
-- [ ] Используется нормализованная структура стейта (createEntityAdapter).
+- [ ] Используется нормализованная структура стейта (createEntityAdapter). [Здесь](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/search/searchSlice.ts)
 - [ ] Подключен storybook и созданы несколько сторисов. (__Не хватило времени__)
 - [x] Использование TypeScript. 
