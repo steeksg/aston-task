@@ -1,0 +1,20 @@
+.pageDetails {
+  &--wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+  }
+  &--card {
+    max-width: 800px;
+  }
+
+  &--img {
+    max-width: 800px;
+  }
+
+  &--buttonBox {
+    display: flex;
+    justify-content: center;
+  }
+}

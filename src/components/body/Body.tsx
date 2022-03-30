@@ -8,6 +8,7 @@ import "./Body.scss";
 import { useAppSelector } from "../../redux/hooks";
 import { selectApp } from "../../appSlice";
 import PageSearch from "./pages/search/PageSearch";
+import PageDetails from "./pages/details/PageDetails";
 
 export default function Body() {
   const backgroundName = useAppSelector(selectApp);
@@ -25,10 +26,8 @@ export default function Body() {
             path="signin"
             element={<PageSign typeSign={EnumTypeSign.In} />}
           />
-          <Route
-            path="search"
-            element={<PageSearch />}
-          />
+          <Route path="search" element={<PageSearch />} />
+          <Route path="details/:id" element={<PageDetails />} />
           <Route path="*" element={<PageMain />} />
         </Routes>
       </Container>
