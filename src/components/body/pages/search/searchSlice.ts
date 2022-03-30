@@ -33,6 +33,7 @@ export interface IFilterCharacter {
   species?: string;
   gender?: string;
   status?: string;
+  page?: string;
 }
 
 export interface IFilterCharacterList {
@@ -80,10 +81,22 @@ export const apiSlice = createApi({
           filter.species ? "&species=" + filter.species : ""
         }${filter.gender ? "&gender=" + filter.gender : ""}${
           filter.status ? "&status=" + filter.status : ""
-        }
+        }${filter.page ? "&page=" + filter.page : ""}
         `,
       transformResponse: (responseData: IResponse) => {
         return responseData.results;
+      },
+    }),
+    searchCharacterInfo: builder.query<IInfo, IFilterCharacter>({
+      query: (filter: IFilterCharacter) =>
+        `/character/?name=${filter.name}${
+          filter.species ? "&species=" + filter.species : ""
+        }${filter.gender ? "&gender=" + filter.gender : ""}${
+          filter.status ? "&status=" + filter.status : ""
+        }
+        `,
+      transformResponse: (responseData: IResponse) => {
+        return responseData.info;
       },
     }),
   }),
@@ -92,5 +105,6 @@ export const apiSlice = createApi({
 export const {
   useGetCharactersQuery,
   useSearchCharacterQuery,
+  useSearchCharacterInfoQuery,
   useGetAllFiltersQuery,
 } = apiSlice;
