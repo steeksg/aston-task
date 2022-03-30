@@ -93,7 +93,7 @@ export const apiSlice = createApi({
           filter.species ? "&species=" + filter.species : ""
         }${filter.gender ? "&gender=" + filter.gender : ""}${
           filter.status ? "&status=" + filter.status : ""
-        }
+        }${filter.page ? "&page=" + filter.page : ""}
         `,
       transformResponse: (responseData: IResponse) => {
         return responseData.info;

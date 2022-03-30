@@ -24,20 +24,6 @@ export default function SearchFilters() {
   const allFilters: IFilterCharacterList | undefined =
     useGetAllFiltersQuery().data;
 
-  const pagesCount: number | undefined = useSearchCharacterInfoQuery({
-    name: searchParams.get("name") || "",
-    species: searchParams.get("species") || "",
-    gender: searchParams.get("gender") || "",
-    status: searchParams.get("status") || "",
-  }).data?.pages;
-
-  const errorPagesCount = useSearchCharacterInfoQuery({
-    name: searchParams.get("name") || "",
-    species: searchParams.get("species") || "",
-    gender: searchParams.get("gender") || "",
-    status: searchParams.get("status") || "",
-  }).error;
-
   const [filters, setFilters] = useState({
     name: searchParams.get("name") || "",
     species: searchParams.get("species") || "",
@@ -45,6 +31,15 @@ export default function SearchFilters() {
     status: searchParams.get("status") || "",
     page: Number(searchParams.get("page")) || 1,
   });
+
+  const pagesCount: number | undefined = useSearchCharacterInfoQuery({
+    ...filters,
+    page: filters.page.toString(),
+  }).data?.pages;
+  const errorPagesCount = useSearchCharacterInfoQuery({
+    ...filters,
+    page: filters.page.toString(),
+  }).error;
 
   useEffect(() => {
     let filter = { name: "" };
@@ -70,7 +65,7 @@ export default function SearchFilters() {
               value={filters.name || ""}
               onChange={(event) => {
                 const value = event.target.value;
-                setFilters({ ...filters, name: value });
+                setFilters({ ...filters, name: value, page: 1 });
               }}
             />
           </Grid>
@@ -82,7 +77,7 @@ export default function SearchFilters() {
                 label="Gender"
                 value={filters.gender || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, gender: event.target.value || "" })
+                  setFilters({ ...filters, gender: event.target.value || "", page: 1 })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
@@ -102,7 +97,7 @@ export default function SearchFilters() {
                 label="Species"
                 value={filters.species || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, species: event.target.value || "" })
+                  setFilters({ ...filters, species: event.target.value || "", page: 1 })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
@@ -122,7 +117,7 @@ export default function SearchFilters() {
                 label="Status"
                 value={filters.status || ""}
                 onChange={(event) =>
-                  setFilters({ ...filters, status: event.target.value || "" })
+                  setFilters({ ...filters, status: event.target.value || "", page: 1 })
                 }
               >
                 <MenuItem value={""}>Empty</MenuItem>
