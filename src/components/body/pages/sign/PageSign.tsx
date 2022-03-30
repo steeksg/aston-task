@@ -161,6 +161,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
       );
       setIsNeedRefreshUsers(true);
       dispatch(userLogIn(username.value));
+      window.localStorage.setItem("currentUser", username.value)
       navigate("/");
     }
   };
@@ -171,6 +172,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
         `Login with username: ${username.value}, pass: ${password.value}`
       );
       dispatch(userLogIn(username.value));
+      window.localStorage.setItem("currentUser", username.value)
       navigate("/");
     }
   };

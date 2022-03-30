@@ -1,12 +1,12 @@
 .title {
-    &--wrap {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        color: white;
-    }
+  &--wrap {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+  }
 
-    &--logoBox {
-        margin-right: 10px;
-    }
+  &--logoBox {
+    margin-right: 10px;
+  }
 }

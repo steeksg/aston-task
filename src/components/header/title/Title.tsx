@@ -5,6 +5,7 @@ import "./Title.scss";
 export default function Title() {
   let navigate = useNavigate();
 
+
   return (
     <div className="title--wrap" onClick={() => navigate("/")}>
       <div className="title--logoBox">

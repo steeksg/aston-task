@@ -13,6 +13,7 @@ export default function ButtonLogout() {
       variant="contained"
       onClick={() => {
         dispatch(userLogOut());
+        window.localStorage.setItem("currentUser", "")
         navigate("/");
       }}
     >
