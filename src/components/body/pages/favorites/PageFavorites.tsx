@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
+import { getFavoritesByUser } from "../../../../utils/localStorage";
 import {
   useGetArrayCharacterQuery,
   useGetCharacterQuery,
@@ -14,11 +15,7 @@ export default function PageFavorites() {
   const [favorites, setFavorites] = useState<number[]>([]);
 
   useEffect(() => {
-    let favoritesJSON = window.localStorage.getItem("favorites");
-    let favorites: { [key: string]: number[] } = favoritesJSON
-      ? JSON.parse(favoritesJSON)
-      : {};
-    setFavorites(favorites[username]);
+    setFavorites(getFavoritesByUser(username));
   }, [username]);
 
   const dataArr = useGetArrayCharacterQuery(favorites.join(",")).data || [];

@@ -15,6 +15,12 @@ import { IUserInfo } from "./tsTypes/IUserInfo";
 import { userLogIn } from "./signSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { changeBackground } from "../../../../appSlice";
+import {
+  addUserToLS,
+  getAllUsersFromLS,
+  resetFavorite,
+  setUsernameToLS,
+} from "../../../../utils/localStorage";
 
 interface IPageSignProps {
   typeSign: EnumTypeSign;
@@ -49,7 +55,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
 
   useEffect(() => {
     if (isNeedRefreshUsers) {
-      setUsers(JSON.parse(window.localStorage.getItem("users") || "[]"));
+      setUsers(getAllUsersFromLS());
       setIsNeedRefreshUsers(false);
     }
   }, [isNeedRefreshUsers]);
@@ -152,35 +158,19 @@ export default function PageSign({ typeSign }: IPageSignProps) {
 
   const handleSubmitSignUp = () => {
     if (validSignUp()) {
-      window.localStorage.setItem(
-        "users",
-        JSON.stringify([
-          ...users,
-          { username: username.value, password: password.value },
-        ])
-      );
+      addUserToLS({ username: username.value, password: password.value });
       setIsNeedRefreshUsers(true);
       dispatch(userLogIn(username.value));
-      window.localStorage.setItem("currentUser", username.value);
-
-      let favoritesJSON = window.localStorage.getItem("favorites");
-      let favorites: { [key: string]: number[] } = favoritesJSON
-        ? JSON.parse(favoritesJSON)
-        : {};
-      favorites[username.value] = [];
-      window.localStorage.setItem("favorites", JSON.stringify(favorites));
-
+      setUsernameToLS(username.value);
+      resetFavorite(username.value);
       navigate("/");
     }
   };
 
   const handleSubmitSignIn = () => {
     if (validSignIn()) {
-      console.log(
-        `Login with username: ${username.value}, pass: ${password.value}`
-      );
       dispatch(userLogIn(username.value));
-      window.localStorage.setItem("currentUser", username.value);
+      setUsernameToLS(username.value);
       navigate("/");
     }
   };

@@ -14,6 +14,7 @@ import "./PageDetails.scss";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectSign } from "../sign/signSlice";
 import { useEffect, useState } from "react";
+import { addIdToFavorite, isFavoriteById, removeIdFromFavorite } from "../../../../utils/localStorage";
 
 export default function PageDetails() {
   let params = useParams();
@@ -23,16 +24,11 @@ export default function PageDetails() {
   const { data, error } = useGetCharacterQuery(Number(params.id));
 
   useEffect(() => {
-    let favoritesJSON = window.localStorage.getItem("favorites");
-    let favorites: { [key: string]: number[] } = favoritesJSON
-      ? JSON.parse(favoritesJSON)
-      : {};
-    data && setIsFavorite(favorites[username].includes(data.id));
+    data && setIsFavorite(isFavoriteById(data.id, username));
   }, [data]);
 
   return (
     <div className="pageDetails--wrap">
-      {/* {data && <CardCharacter {...data} />} */}
       {!error && data && (
         <Card className="pageDetails--card">
           <CardMedia
@@ -76,29 +72,12 @@ export default function PageDetails() {
               size="large"
               aria-label="add to favorites"
               onClick={() => {
-                let favoritesJSON = window.localStorage.getItem("favorites");
-                let favorites: { [key: string]: number[] } = favoritesJSON
-                  ? JSON.parse(favoritesJSON)
-                  : {};
-
-                if (favorites[username]) {
-                  if (favorites[username].includes(data.id)) {
-                    favorites[username] = favorites[username].filter(
-                      (i) => i != data.id
-                    );
-                    window.localStorage.setItem(
-                      "favorites",
-                      JSON.stringify(favorites)
-                    );
-                    setIsFavorite(false);
-                  } else {
-                    favorites[username].push(data.id);
-                    window.localStorage.setItem(
-                      "favorites",
-                      JSON.stringify(favorites)
-                    );
-                    setIsFavorite(true);
-                  }
+                if (isFavoriteById(data.id, username)) {
+                  removeIdFromFavorite(data.id, username)
+                  setIsFavorite(false);
+                } else {
+                  addIdToFavorite(data.id, username)
+                  setIsFavorite(true);
                 }
               }}
             >

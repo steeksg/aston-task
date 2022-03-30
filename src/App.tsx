@@ -5,10 +5,11 @@ import { userLogIn } from "./components/body/pages/sign/signSlice";
 
 import Header from "./components/header/Header";
 import Body from "./components/body/Body";
+import { getUsernameFromLS } from "./utils/localStorage";
 
 function App() {
   const dispatch = useAppDispatch();
-  const currentUserLS = window.localStorage.getItem("currentUser");
+  const currentUserLS = getUsernameFromLS();
   currentUserLS && dispatch(userLogIn(currentUserLS));
 
   return (
