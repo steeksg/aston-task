@@ -19,6 +19,7 @@ import {
   addUserToLS,
   getAllUsersFromLS,
   resetFavoriteByUsername,
+  resetHistoryByUsername,
   setUsernameToLS,
 } from "../../../../utils/localStorage";
 
@@ -163,6 +164,7 @@ export default function PageSign({ typeSign }: IPageSignProps) {
       dispatch(userLogIn(username.value));
       setUsernameToLS(username.value);
       resetFavoriteByUsername(username.value);
+      resetHistoryByUsername(username.value);
       navigate("/");
     }
   };
