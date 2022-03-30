@@ -41,7 +41,13 @@ export const apiSlice = createApi({
         return responseData.results
       }
     }),
+    searchCharacter: builder.query<ICharacter[], string>({
+      query: (text: string) => `/character/?name=${text}`,
+      transformResponse: (responseData: IResponse) => {
+        return responseData.results
+      }
+    }),
   }),
 });
 
-export const { useGetCharactersQuery } = apiSlice;
+export const { useGetCharactersQuery, useSearchCharacterQuery  } = apiSlice;
