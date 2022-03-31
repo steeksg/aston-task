@@ -22,7 +22,7 @@
 #### Redux
 - [x] Используем Modern Redux with Redux Toolkit. [Здесь](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/search/searchSlice.ts).
 - [x] Используем слайсы. [Здесь](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/search/searchSlice.ts).
-- [ ] Есть хотя бы одна кастомная мидлвара 
+- [x] Есть хотя бы одна кастомная мидлвара. [Простейшая миделвара на логирование входящего пользователя](https://github.com/steeksg/aston-task/blob/460c8d9505ea20b32a60aebb0bfc5bdf4e220a9e/src/redux/store.ts#L7).
 - [x] Используется RTK Query.  [Здесь](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/search/searchSlice.ts).
 - [x] Используется Transforming Responses.  [Здесь](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/search/searchSlice.ts).
 
