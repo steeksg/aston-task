@@ -20,7 +20,7 @@
     height: 100%;
   }
   &--favorite {
-    position: absolute;
+    position: absolute !important;
     bottom:30px;
     right: 30px;
   }
