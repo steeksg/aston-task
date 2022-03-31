@@ -6,6 +6,7 @@ import "./PageSearch.scss";
 import SearchFilters from "./searchFilters/SearchFilters";
 import { useFavorites } from "../../../../utils/customHOCs/useFavorites";
 import React from "react";
+import Boundary from "./Boundary";
 
 export default function PageSearch() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -24,23 +25,31 @@ export default function PageSearch() {
   return (
     <React.Fragment>
       <SearchFilters />
-      <Grid container spacing={2} className="pageSearch--wrap">
-        {!error &&
-          data?.map((item) => (
-            <CardCharacter
-              key={item.id}
-              data={item}
-              isFavorite={favorites && favorites.includes(item.id)}
-              setIsFavorite={() => {
-                if (favorites) {
-                  toggleFavorite(item.id);
-                } else {
-                  navigate("/signin");
-                }
-              }}
-            />
-          ))}
-      </Grid>
+      <Boundary isError={!!error}>
+        <Grid container spacing={2} className="pageSearch--wrap">
+          {!error &&
+            data?.map((item) => (
+              <CardCharacter
+                key={item.id}
+                data={item}
+                isFavorite={favorites && favorites.includes(item.id)}
+                setIsFavorite={() => {
+                  if (favorites) {
+                    toggleFavorite(item.id);
+                  } else {
+                    navigate("/signin");
+                  }
+                }}
+              />
+            ))}
+          <ComponentForErrorDemonstration isError={!!error} />
+        </Grid>
+      </Boundary>
     </React.Fragment>
   );
+}
+
+function ComponentForErrorDemonstration(props: { isError: boolean }) {
+  if (props.isError) throw new Error();
+  else return <div></div>;
 }
