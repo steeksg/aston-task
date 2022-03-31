@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
-import { getFavoritesByUser } from "../../../../utils/localStorage";
+import { getFavoritesByUser } from "../../../../utils/ls/favorite";
 import {
   useGetArrayCharacterQuery,
   useGetCharacterQuery,

@@ -5,8 +5,9 @@ import { userLogIn } from "./components/body/pages/sign/signSlice";
 
 import Header from "./components/header/Header";
 import Body from "./components/body/Body";
-import { getUsernameFromLS, initLS } from "./utils/localStorage";
+import { initLS } from "./utils/ls/common";
 import { useEffect } from "react";
+import { getUsernameFromLS } from "./utils/ls/user";
 
 function App() {
   const dispatch = useAppDispatch();

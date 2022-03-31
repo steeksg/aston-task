@@ -14,7 +14,7 @@ import "./PageDetails.scss";
 import { useAppSelector } from "../../../../redux/hooks";
 import { selectSign } from "../sign/signSlice";
 import { useEffect, useState } from "react";
-import { addIdToFavorite, isFavoriteById, removeIdFromFavorite } from "../../../../utils/localStorage";
+import { addIdToFavorite, isFavoriteById, removeIdFromFavorite } from "../../../../utils/ls/favorite";
 
 export default function PageDetails() {
   let params = useParams();

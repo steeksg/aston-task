@@ -15,13 +15,10 @@ import { IUserInfo } from "./tsTypes/IUserInfo";
 import { userLogIn } from "./signSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { changeBackground } from "../../../../appSlice";
-import {
-  addUserToLS,
-  getAllUsersFromLS,
-  resetFavoriteByUsername,
-  resetHistoryByUsername,
-  setUsernameToLS,
-} from "../../../../utils/localStorage";
+import { addUserToLS, getAllUsersFromLS, setUsernameToLS } from "../../../../utils/ls/user";
+import { resetFavoriteByUsername } from "../../../../utils/ls/favorite";
+import { resetHistoryByUsername } from "../../../../utils/ls/history";
+
 
 interface IPageSignProps {
   typeSign: EnumTypeSign;
