@@ -11,13 +11,15 @@ import { ICharacter } from "../searchSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./CardCharacter.scss";
 
+import * as PropTypes from "prop-types";
+
 export interface ICardCharacterProps {
   data: ICharacter;
   isFavorite: boolean;
   setIsFavorite: () => void;
 }
 
-export default function CardCharacter({
+function CardCharacter({
   data,
   isFavorite,
   setIsFavorite,
@@ -65,3 +67,27 @@ export default function CardCharacter({
     </Grid>
   );
 }
+
+CardCharacter.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    status: PropTypes.string,
+    species: PropTypes.string,
+    type: PropTypes.string,
+    gender: PropTypes.string,
+    origin: PropTypes.shape({ name: PropTypes.string, url: PropTypes.string }),
+    location: PropTypes.shape({
+      name: PropTypes.string,
+      url: PropTypes.string,
+    }),
+    image: PropTypes.string,
+    episode: PropTypes.arrayOf(PropTypes.string),
+    url: PropTypes.string,
+    created: PropTypes.string,
+  }),
+  isFavorite: PropTypes.bool,
+  setIsFavorite: PropTypes.func,
+};
+
+export default CardCharacter;
