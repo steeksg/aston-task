@@ -15,10 +15,13 @@ import { IUserInfo } from "./tsTypes/IUserInfo";
 import { userLogIn } from "./signSlice";
 import { useAppDispatch } from "../../../../redux/hooks";
 import { changeBackground } from "../../../../appSlice";
-import { addUserToLS, getAllUsersFromLS, setUsernameToLS } from "../../../../utils/ls/user";
+import {
+  addUserToLS,
+  getAllUsersFromLS,
+  setUsernameToLS,
+} from "../../../../utils/ls/user";
 import { resetFavoriteByUsername } from "../../../../utils/ls/favorite";
 import { resetHistoryByUsername } from "../../../../utils/ls/history";
-
 
 interface IPageSignProps {
   typeSign: EnumTypeSign;
@@ -237,13 +240,23 @@ export default function PageSign({ typeSign }: IPageSignProps) {
           >
             {typeSign === EnumTypeSign.Up ? "Sign up" : "Sign in"}
           </Button>
-          {typeSign === EnumTypeSign.Up && (
+          {/* {typeSign === EnumTypeSign.Up && (
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/signin">Already have an account? Sign in</Link>
               </Grid>
             </Grid>
-          )}
+          )} */}
+
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              {typeSign === EnumTypeSign.Up ? (
+                <Link to="/signin">Already have an account? Sign in</Link>
+              ) : (
+                <Link to="/signup">You don't have an account yet? Sign up</Link>
+              )}
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Box>

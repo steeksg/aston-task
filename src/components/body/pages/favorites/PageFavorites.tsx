@@ -1,12 +1,7 @@
 import { Grid } from "@mui/material";
-import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
 import { useFavorites } from "../../../../utils/customHOCs/useFavorites";
-import {
-  getFavoritesByUser,
-  isFavoriteById,
-  toggleIdInFavoritesById,
-} from "../../../../utils/ls/favorite";
+import { isFavoriteById } from "../../../../utils/ls/favorite";
 import {
   useGetArrayCharacterQuery,
   useGetCharacterQuery,
@@ -30,15 +25,16 @@ export default function PageFavorites() {
               <CardCharacter
                 key={item.id}
                 data={item}
-                isFavorite={isFavoriteById(item.id)}
+                isFavorite={favorites && favorites.includes(item.id)}
                 setIsFavorite={() => toggleFavorite(item.id)}
               />
             ))
-          : data && (
+          : !!favorites &&
+            data && (
               <CardCharacter
                 key={data.id}
                 data={data}
-                isFavorite={isFavoriteById(data.id)}
+                isFavorite={favorites && favorites.includes(data.id)}
                 setIsFavorite={() => toggleFavorite(data.id)}
               />
             )}
