@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { addRecordInHistory } from "../../../../../utils/localStorage";
+import { addRecordInHistory } from "../../../../../utils/ls/history";
 import {
   IFilterCharacterList,
   useGetAllFiltersQuery,
