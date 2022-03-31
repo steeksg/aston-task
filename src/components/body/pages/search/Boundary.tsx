@@ -1,4 +1,5 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
+import * as PropTypes from "prop-types";
 
 interface Props {
   children: ReactNode;
@@ -14,10 +15,15 @@ class Boundary extends Component<Props, State> {
     hasError: false,
   };
 
+  static propTypes = {
+    children: PropTypes.element,
+    isError: PropTypes.bool,
+  };
+
   componentDidUpdate() {
-      if(this.state.hasError && !this.props.isError) {
-        this.setState({ hasError: false });
-      }
+    if (this.state.hasError && !this.props.isError) {
+      this.setState({ hasError: false });
+    }
   }
 
   public static getDerivedStateFromError(_: Error): State {
