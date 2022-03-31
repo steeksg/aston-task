@@ -1,7 +1,11 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
-import { getFavoritesByUser } from "../../../../utils/ls/favorite";
+import {
+  getFavoritesByUser,
+  isFavoriteById,
+  toggleIdInFavoritesById,
+} from "../../../../utils/ls/favorite";
 import {
   useGetArrayCharacterQuery,
   useGetCharacterQuery,
@@ -18,6 +22,15 @@ export default function PageFavorites() {
     setFavorites(getFavoritesByUser(username));
   }, [username]);
 
+  const toogleFavorite = (id: number) => {
+    if (favorites.includes(id)) {
+      setFavorites(favorites.filter((i) => i != id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
+    toggleIdInFavoritesById(id);
+  };
+
   const dataArr = useGetArrayCharacterQuery(favorites.join(",")).data || [];
   const data = useGetCharacterQuery(Number(favorites[0])).data;
 
@@ -25,8 +38,22 @@ export default function PageFavorites() {
     <div>
       <Grid container spacing={2} className="pageSearch--wrap">
         {dataArr.length > 1
-          ? dataArr?.map((item) => <CardCharacter key={item.id} {...item} />)
-          : data && <CardCharacter {...data} />}
+          ? dataArr?.map((item) => (
+              <CardCharacter
+                key={item.id}
+                data={item}
+                isFavorite={isFavoriteById(item.id)}
+                setIsFavorite={() => toogleFavorite(item.id)}
+              />
+            ))
+          : data && (
+              <CardCharacter
+                key={data.id}
+                data={data}
+                isFavorite={isFavoriteById(data.id)}
+                setIsFavorite={() => toogleFavorite(data.id)}
+              />
+            )}
       </Grid>
     </div>
   );

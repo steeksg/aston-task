@@ -17,6 +17,17 @@ export const addIdToFavorite = (
   window.localStorage.setItem("favorites", JSON.stringify(favorites));
 };
 
+export const toggleIdInFavoritesById = (
+  id: number,
+  username: string = getUsernameFromLS()
+) => {
+  if (isFavoriteById(id, username)) {
+    removeIdFromFavorite(id, username);
+  } else {
+    addIdToFavorite(id, username);
+  }
+};
+
 export const resetFavoriteByUsername = (
   username: string = getUsernameFromLS()
 ) => {
@@ -42,6 +53,6 @@ export const getAllFavorites = () => {
   return favorites;
 };
 
-export const getFavoritesByUser = (username: string) => {
+export const getFavoritesByUser = (username: string = getUsernameFromLS()) => {
   return getAllFavorites()[username];
 };

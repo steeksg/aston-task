@@ -11,37 +11,57 @@ import { ICharacter } from "../searchSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./CardCharacter.scss";
 
-export default function CardCharacter(props: ICharacter) {
+export interface ICardCharacterProps {
+  data: ICharacter;
+  isFavorite: boolean;
+  setIsFavorite: () => void;
+}
+
+export default function CardCharacter({
+  data,
+  isFavorite,
+  setIsFavorite,
+}: ICardCharacterProps) {
   return (
     <Grid className="cardCharacter--wrap" item xs={6}>
-      <Link className="cardCharacter--link" to={`/details/${props.id}`}>
-        <Card className="cardCharacter--content">
+      <Card className="cardCharacter--content">
+        <Link className="cardCharacter--link" to={`/details/${data.id}`}>
           <CardMedia
             className="cardCharacter--img"
             component="img"
-            image={props.image}
-            alt={props.name}
+            image={data.image}
+            alt={data.name}
           />
           <CardContent className="cardCharacter--text">
             <Typography gutterBottom variant="h5" component="div">
-              {props.name}
+              {data.name}
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Gender: {props.gender}
+              Gender: {data.gender}
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Species: {props.species}
+              Species: {data.species}
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Status: {props.status}
+              Status: {data.status}
             </Typography>
 
             <Typography variant="body1" color="text.secondary">
-              Type: {props.type ? props.type : "Standard"}
+              Type: {data.type ? data.type : "Standard"}
             </Typography>
           </CardContent>
-        </Card>
-      </Link>
+        </Link>
+        <Fab
+          className="cardCharacter--favorite"
+          color={isFavorite ? "error" : "default"}
+          onClick={(event) => {
+            event.preventDefault();
+            setIsFavorite();
+          }}
+        >
+          <FavoriteIcon />
+        </Fab>
+      </Card>
     </Grid>
   );
 }
