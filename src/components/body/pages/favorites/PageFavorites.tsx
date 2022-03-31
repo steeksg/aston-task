@@ -22,7 +22,7 @@ export default function PageFavorites() {
     setFavorites(getFavoritesByUser(username));
   }, [username]);
 
-  const toogleFavorite = (id: number) => {
+  const toggleFavorite = (id: number) => {
     if (favorites.includes(id)) {
       setFavorites(favorites.filter((i) => i != id));
     } else {
@@ -43,7 +43,7 @@ export default function PageFavorites() {
                 key={item.id}
                 data={item}
                 isFavorite={isFavoriteById(item.id)}
-                setIsFavorite={() => toogleFavorite(item.id)}
+                setIsFavorite={() => toggleFavorite(item.id)}
               />
             ))
           : data && (
@@ -51,7 +51,7 @@ export default function PageFavorites() {
                 key={data.id}
                 data={data}
                 isFavorite={isFavoriteById(data.id)}
-                setIsFavorite={() => toogleFavorite(data.id)}
+                setIsFavorite={() => toggleFavorite(data.id)}
               />
             )}
       </Grid>
