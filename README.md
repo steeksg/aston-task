@@ -15,7 +15,7 @@
 - [x] Реализована хотя бы одна форма. [К примеру форма регистрации, Box на строке 188 это форма](https://github.com/steeksg/aston-task/blob/46b369d2d80806d115d95de79d3768bef8fc305d/src/components/body/pages/sign/PageSign.tsx#L188).
 - [ ] Есть применение Контекст API
 - [ ] Есть применение предохранителя
-- [x] Есть хотя бы один кастомный хук. [Декларация](https://github.com/steeksg/aston-task/blob/master/src/utils/customHOCs/useFavorites.ts). [Применение 1](https://github.com/steeksg/aston-task/blob/092e6bcfb584ba1d0adbe0c5590aa5a287e7bdc3/src/components/body/pages/favorites/PageFavorites.tsx#L20). Применение 2](https://github.com/steeksg/aston-task/blob/092e6bcfb584ba1d0adbe0c5590aa5a287e7bdc3/src/components/body/pages/search/PageSearch.tsx#L27).
+- [x] Есть хотя бы один кастомный хук. [Декларация](https://github.com/steeksg/aston-task/blob/master/src/utils/customHOCs/useFavorites.ts). [Применение 1](https://github.com/steeksg/aston-task/blob/092e6bcfb584ba1d0adbe0c5590aa5a287e7bdc3/src/components/body/pages/favorites/PageFavorites.tsx#L20). [Применение 2](https://github.com/steeksg/aston-task/blob/092e6bcfb584ba1d0adbe0c5590aa5a287e7bdc3/src/components/body/pages/search/PageSearch.tsx#L27).
 - [ ] Хотя бы несколько компонентов используют PropTypes
 - [x] Поиск не должен триггерить много запросов к серверу. 
 
