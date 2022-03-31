@@ -11,6 +11,7 @@ import {
   isFavoriteById,
   toggleIdInFavoritesById,
 } from "../../../../utils/ls/favorite";
+import { useFavorites } from "../../../../utils/customHOCs/useFavorites";
 
 export default function PageSearch() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -23,20 +24,7 @@ export default function PageSearch() {
     page: searchParams.get("page") || "",
   });
 
-  const [favorites, setFavorites] = useState<number[]>([]);
-
-  const toogleFavorite = (id: number) => {
-    if (favorites.includes(id)) {
-      setFavorites(favorites.filter((i) => i != id));
-    } else {
-      setFavorites([...favorites, id]);
-    }
-    toggleIdInFavoritesById(id);
-  };
-
-  useEffect(() => {
-    setFavorites(getFavoritesByUser());
-  }, [data]);
+  let [favorites, toggleFavorite] = useFavorites();
 
   return (
     <React.Fragment>
@@ -48,7 +36,7 @@ export default function PageSearch() {
               key={item.id}
               data={item}
               isFavorite={favorites.includes(item.id)}
-              setIsFavorite={() => toogleFavorite(item.id)}
+              setIsFavorite={() => toggleFavorite(item.id)}
             />
           ))}
       </Grid>

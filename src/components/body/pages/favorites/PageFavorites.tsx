@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../../../../redux/hooks";
+import { useFavorites } from "../../../../utils/customHOCs/useFavorites";
 import {
   getFavoritesByUser,
   isFavoriteById,
@@ -16,20 +17,7 @@ import { selectSign } from "../sign/signSlice";
 export default function PageFavorites() {
   const username = useAppSelector(selectSign);
 
-  const [favorites, setFavorites] = useState<number[]>([]);
-
-  useEffect(() => {
-    setFavorites(getFavoritesByUser(username));
-  }, [username]);
-
-  const toggleFavorite = (id: number) => {
-    if (favorites.includes(id)) {
-      setFavorites(favorites.filter((i) => i != id));
-    } else {
-      setFavorites([...favorites, id]);
-    }
-    toggleIdInFavoritesById(id);
-  };
+  let [favorites, toggleFavorite] = useFavorites();
 
   const dataArr = useGetArrayCharacterQuery(favorites.join(",")).data || [];
   const data = useGetCharacterQuery(Number(favorites[0])).data;
