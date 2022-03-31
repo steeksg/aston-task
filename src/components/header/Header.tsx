@@ -5,6 +5,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectSign } from "../body/pages/sign/signSlice";
 
 import "./Header.scss";
+import { UserContext } from "../../App";
 
 export default function Header() {
   const username = useAppSelector(selectSign);
@@ -14,7 +15,11 @@ export default function Header() {
       <Container>
         <div className="header--content">
           <Title />
-          <div className="header--username">{username.toUpperCase()}</div>
+          <UserContext.Consumer>
+            {
+              user =>  <div className="header--username">{user.toUpperCase()}</div>
+            }
+          </UserContext.Consumer>
           <Buttons />
         </div>
       </Container>

@@ -17,7 +17,7 @@ import { getUsernameFromLS } from "../../../../utils/ls/user";
 import "./PageHistory.scss";
 
 export default function PageHistory() {
-  const history = getHistoryByUser();
+  let history = getHistoryByUser();
   let navigate = useNavigate();
 
   const [flagRerender, setFlagRerender] = useState(false);
@@ -44,7 +44,7 @@ export default function PageHistory() {
       {history.length > 0 && (
         <List className="pageHistory--wrap">
           {history &&
-            history.map((record, index) => {
+            history.reverse().map((record, index) => {
               return (
                 <React.Fragment key={record.name + index}>
                   <ListItem

@@ -1,20 +1,15 @@
 import { Grid } from "@mui/material";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import CardCharacter from "./cardCharacter/CardCharacter";
 import { useSearchCharacterQuery } from "./searchSlice";
 import "./PageSearch.scss";
 import SearchFilters from "./searchFilters/SearchFilters";
-import React, { useEffect, useState } from "react";
-import {
-  addIdToFavorite,
-  getFavoritesByUser,
-  isFavoriteById,
-  toggleIdInFavoritesById,
-} from "../../../../utils/ls/favorite";
 import { useFavorites } from "../../../../utils/customHOCs/useFavorites";
+import React from "react";
 
 export default function PageSearch() {
   let [searchParams, setSearchParams] = useSearchParams();
+  let navigate = useNavigate();
 
   const { data, error } = useSearchCharacterQuery({
     name: searchParams.get("name") || "",
@@ -35,8 +30,14 @@ export default function PageSearch() {
             <CardCharacter
               key={item.id}
               data={item}
-              isFavorite={favorites.includes(item.id)}
-              setIsFavorite={() => toggleFavorite(item.id)}
+              isFavorite={favorites && favorites.includes(item.id)}
+              setIsFavorite={() => {
+                if (favorites) {
+                  toggleFavorite(item.id);
+                } else {
+                  navigate("/signin");
+                }
+              }}
             />
           ))}
       </Grid>
